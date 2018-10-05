@@ -1,0 +1,26 @@
+specs:
+
+- name: simple
+  help: subcommand without args
+
+- name: no-so-simple
+  help: subcommand with args
+  args:
+    - name: some-arg
+      type: String
+      help: some-help help
+      positional: true
+    - name: some-other-arg
+      type: PathBuf
+
+- name: complex
+  help: subcommand with args
+  nested:
+    - name: nested-subcommand
+      args:
+        - name: some-arg
+          type: String
+          help: helped for nested subcommand arg
+        - name: some-other-arg
+          type: Url
+    - name: another-nested-subcommand

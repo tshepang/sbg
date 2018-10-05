@@ -1,0 +1,24 @@
+[package]
+name = "sbg"
+version = "0.0.1"
+description = "generates boilerplate for a structopt-driven cli"
+repository = "https://github.com/tshepang/sbg"
+license = "MIT/Apache-2.0"
+readme = "README.md"
+categories = ["command-line-utilities"]
+keywords = ["cli", "clap", "structopt"]
+authors = ["Tshepang Lekhonkhobe <tshepang@gmail.com>"]
+
+[dependencies]
+pretty_env_logger = "0.2"
+log = "0.4"
+serde = "1"
+serde_derive = "1"
+serde_yaml = "0.8"
+structopt = "0.2"
+handlebars = "1"
+heck = "0.3"
+
+[badges]
+travis-ci = { repository = "tshepang/sbg" }
+appveyor = { repository = "tshepang/sbg" }
