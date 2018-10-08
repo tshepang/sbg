@@ -27,6 +27,17 @@ My actual inspiration though is I wanted something that'd also
 generate [warp] boilerplate, together with the [reqwest] code which
 generates it (which also exists, but is also not public).
 
+## Would be nice to fix
+
+- check "type" actually has valid Rust types
+- check "name" does not have spaces
+- disallow having both "args" and "nested" (results in build failure),
+  or support it (which would be useful for subcommands that share some
+  options)
+- when "type" is not specified, assume bool
+- ensure no args have same name (results in build failure)
+- support > 1 positional args
+
 ## Installation
 
 Assuming you have the [Rust toolchain installed][install]):

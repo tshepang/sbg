@@ -96,13 +96,6 @@ fn run() -> Result<(), Box<Error>> {
     debug!("Parsing input file: {:?}", cli.input);
     let input: Settings =
         serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
-    // XXX:
-    // - check "type" actually has valid Rust types
-    // - check "name" does not have spaces
-    // - disallow having both "args" and "nested"
-    // - when type is not specified, assume bool
-    // - ensure no args have same name
-    // - support > 1 positional args
     assemble_main(&input, &cli.output_dir)?;
     Ok(())
 }
