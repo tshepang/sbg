@@ -11,7 +11,6 @@ extern crate serde_yaml;
 extern crate structopt;
 
 use std::{
-    collections::HashMap as Map,
     error::Error,
     fs,
     path::{Path, PathBuf},
@@ -22,7 +21,7 @@ use handlebars::Handlebars;
 use heck::{CamelCase, KebabCase, SnakeCase};
 use structopt::StructOpt;
 
-#[derive(StructOpt, Debug)]
+#[derive(StructOpt)]
 struct Opt {
     #[structopt(parse(from_os_str))]
     /// specification file
@@ -30,6 +29,12 @@ struct Opt {
     #[structopt(parse(from_os_str))]
     /// directory to place main.rs
     output_dir: PathBuf,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+struct Settings {
+    imports: Vec<String>,
+    cli: Vec<Specification>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -58,7 +63,7 @@ struct Argument {
     positional: bool,
 }
 
-fn assemble_main(specs: &Map<String, Vec<Specification>>, dir: &Path) -> Result<(), Box<Error>> {
+fn assemble_main(settings: &Settings, dir: &Path) -> Result<(), Box<Error>> {
     if !dir.exists() {
         fs::create_dir_all(&dir)?;
     }
@@ -74,8 +79,14 @@ fn assemble_main(specs: &Map<String, Vec<Specification>>, dir: &Path) -> Result<
     handlebars.register_helper("pascal-case", Box::new(pascal_case));
     handlebars_helper!(string_contains: |x: str, y: str| x.contains(y));
     handlebars.register_helper("string-contains", Box::new(string_contains));
+    handlebars_helper!(crate_name: |x: str| x.split("::").next().unwrap());
+    handlebars.register_helper("crate-name", Box::new(crate_name));
+    handlebars_helper!(skip_crate_name: |x: str| x.splitn(2, "::").skip(1).collect::<String>());
+    handlebars.register_helper("skip-crate-name", Box::new(skip_crate_name));
+    handlebars_helper!(is_stdlib: |x: str| x.starts_with("std::"));
+    handlebars.register_helper("is-stdlib", Box::new(is_stdlib));
     let tpl = include_str!("main.rs.tpl");
-    let content = handlebars.render_template(tpl, &specs)?;
+    let content = handlebars.render_template(tpl, &settings)?;
     fs::write(path, content)?;
     Ok(())
 }
@@ -83,7 +94,7 @@ fn assemble_main(specs: &Map<String, Vec<Specification>>, dir: &Path) -> Result<
 fn run() -> Result<(), Box<Error>> {
     let cli = Opt::from_args();
     debug!("Parsing input file: {:?}", cli.input);
-    let input: Map<String, Vec<Specification>> =
+    let input: Settings =
         serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
     // XXX:
     // - check "type" actually has valid Rust types

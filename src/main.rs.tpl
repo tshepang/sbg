@@ -3,22 +3,34 @@ extern crate log;
 extern crate pretty_env_logger;
 #[macro_use]
 extern crate structopt;
-extern crate url;
+{{~ #each imports as |import| }}
+{{~ #unless (is-stdlib import) }}
+extern crate {{ crate-name import }};
+{{~ /unless }}
+{{~ /each }}
 
 use std::{
     error::Error,
-    path::PathBuf,
     process,
+    {{ #each imports as |import| }}
+    {{~ #if (is-stdlib import) }}
+    {{~ skip-crate-name import }},
+    {{~ /if }}
+    {{~ /each }}
 };
 
 use structopt::{clap::AppSettings, StructOpt};
-use url::Url;
+{{~ #each imports as |import| }}
+{{~ #unless (is-stdlib import) }}
+use {{ import }};
+{{~ /unless }}
+{{~ /each }}
 
 #[derive(StructOpt)]
 #[structopt(raw(global_setting = "AppSettings::VersionlessSubcommands"))]
 #[structopt(raw(global_setting = "AppSettings::DisableHelpSubcommand"))]
 enum Opt {
-    {{~ #each specs }}
+    {{~ #each cli }}
     {{~ #if help }}
     /// {{ help }}
     {{~ /if }}
@@ -52,7 +64,7 @@ enum Opt {
     {{~ /if }}
     {{~ /each }}
 }
-{{~ #each specs }}
+{{~ #each cli }}
 {{~ #if nested }}
 
 #[derive(StructOpt)]
@@ -90,7 +102,7 @@ fn run() -> Result<(), Box<Error>> {
     let cli = Opt::from_args();
     use Opt::*;
     match cli {
-        {{~ #each specs }}
+        {{~ #each cli }}
         {{~ #if nested }}
         {{ pascal-case name }}({{ snake-case name }}) => {
             use {{ pascal-case name }}Type::*;
