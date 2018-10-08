@@ -69,8 +69,7 @@ struct Argument {
 fn run() -> Result<(), Box<Error>> {
     let cli = Opt::from_args();
     debug!("Parsing input file: {:?}", cli.input);
-    let settings: Settings =
-        serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
+    let settings: Settings = serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
     if !cli.output_dir.exists() {
         fs::create_dir_all(&cli.output_dir)?;
     }
