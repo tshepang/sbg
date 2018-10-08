@@ -26,6 +26,8 @@ use {{ import }};
 {{~ /unless }}
 {{~ /each }}
 
+mod main_impl;
+
 #[derive(StructOpt)]
 #[structopt(raw(global_setting = "AppSettings::VersionlessSubcommands"))]
 #[structopt(raw(global_setting = "AppSettings::DisableHelpSubcommand"))]
@@ -113,7 +115,11 @@ fn run() -> Result<(), Box<Error>> {
                     {{ snake-case name }},
                 {{~ /each }}
                 } => {
-                    unimplemented!();
+                    main_impl::{{ ../name }}_{{ snake-case name }}(
+                        {{~ #each args }}
+                        {{ snake-case name }},
+                        {{~ /each }}
+                    )?
                 }
                 {{~ /each }}
             }
@@ -124,7 +130,11 @@ fn run() -> Result<(), Box<Error>> {
             {{ snake-case name }},
         {{~ /each }}
         } => {
-            unimplemented!();
+            main_impl::{{ snake-case name }}(
+                {{~ #each args }}
+                {{ snake-case name }},
+                {{~ /each }}
+            )?
         }
         {{~ /if }}
         {{~ /each }}
