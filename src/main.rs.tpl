@@ -115,7 +115,7 @@ fn run() -> Result<(), Box<Error>> {
                     {{ snake-case name }},
                 {{~ /each }}
                 } => {
-                    main_impl::{{ ../name }}_{{ snake-case name }}(
+                    main_impl::{{ snake-case ../name }}_{{ snake-case name }}(
                         {{~ #each args }}
                         {{ snake-case name }},
                         {{~ /each }}

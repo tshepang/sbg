@@ -14,7 +14,7 @@ use {{ import }};
 {{~ #each cli }}
 {{~ #if nested }}
 {{~ #each nested }}
-pub(crate) fn {{ ../name }}_{{ snake-case name }}(
+pub(crate) fn {{ snake-case ../name }}_{{ snake-case name }}(
     {{~ #each args }}
     {{ snake-case name }}: {{ type }},
     {{~ /each }}
@@ -23,14 +23,12 @@ pub(crate) fn {{ ../name }}_{{ snake-case name }}(
 }
 {{ /each }}
 {{ else }}
-{{ #if args }}
-pub(crate) fn {{ name }}(
+pub(crate) fn {{ snake-case name }}(
     {{~ #each args }}
     {{ snake-case name }}: {{ type }},
     {{~ /each }}
 ) -> Result<(), Box<Error>> {
     unimplemented!();
 }
-{{ /if }}
 {{~ /if }}
 {{~ /each ~}}
