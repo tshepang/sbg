@@ -40,7 +40,7 @@ generates it (which also exists, but is also not public).
 
 ## Installation
 
-Assuming you have the [Rust toolchain installed][install]):
+Assuming you have the [Rust toolchain installed][install]:
 
     cargo install sbg
 
