@@ -32,6 +32,8 @@ struct Opt {
     #[structopt(long = "override-impl")]
     /// override main_impl.rs
     override_impl: bool,
+    #[structopt(long = "show-summary")]
+    show_summary: bool,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -84,6 +86,8 @@ fn run() -> Result<(), Box<Error>> {
     handlebars.register_helper("pascal-case", Box::new(pascal_case));
     handlebars_helper!(string_contains: |x: str, y: str| x.contains(y));
     handlebars.register_helper("string-contains", Box::new(string_contains));
+    handlebars_helper!(string_eq: |x: str, y: str| x == y);
+    handlebars.register_helper("string-eq", Box::new(string_eq));
     handlebars_helper!(crate_name: |x: str| x.split("::").next().unwrap());
     handlebars.register_helper("crate-name", Box::new(crate_name));
     handlebars_helper!(skip_crate_name: |x: str| x.splitn(2, "::").skip(1).collect::<String>());
@@ -97,6 +101,11 @@ fn run() -> Result<(), Box<Error>> {
         let tpl = include_str!("main_impl.rs.tpl");
         let content = handlebars.render_template(tpl, &settings)?;
         fs::write(cli.output_dir.join("main_impl.rs"), content)?;
+    }
+    if cli.show_summary {
+        let tpl = include_str!("summary.tpl");
+        let content = handlebars.render_template(tpl, &settings)?;
+        println!("{}", content);
     }
 
     Ok(())
