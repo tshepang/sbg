@@ -3,7 +3,7 @@ cli:
 - name: simple
   help: subcommand without args
 
-- name: no-so-simple
+- name: not-so-simple
   help: subcommand with args
   args:
     - name: some-arg
