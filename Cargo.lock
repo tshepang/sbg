@@ -257,7 +257,7 @@ dependencies = [
 
 [[package]]
 name = "sbg"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "handlebars 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "heck 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",

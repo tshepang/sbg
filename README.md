@@ -1,7 +1,7 @@
 # sbg - StructOpt-driven Boilerplate Generator
 
 [![Linux build status](https://travis-ci.org/tshepang/mrh.svg?branch=master)](https://travis-ci.org/tshepang/sbg)
-[![Windows build status](https://ci.appveyor.com/api/projects/status/github/tshepang/scli?svg=true)](https://ci.appveyor.com/project/tshepang/sbg)
+[![Windows build status](https://ci.appveyor.com/api/projects/status/github/tshepang/sbg?svg=true)](https://ci.appveyor.com/project/tshepang/sbg)
 
 You give this a yaml spec and it generates boilerplate code for you,
 which compiles if you give it Cargo.toml with these contents:
@@ -42,7 +42,7 @@ generates it (which also exists, but is also not public).
 
 Assuming you have the [Rust toolchain installed][install]):
 
-    cargo install scli
+    cargo install sbg
 
 ## License
 

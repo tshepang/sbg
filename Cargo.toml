@@ -1,6 +1,6 @@
 [package]
 name = "sbg"
-version = "0.0.0"
+version = "0.0.1"
 description = "generates boilerplate for a structopt-driven cli"
 repository = "https://github.com/tshepang/sbg"
 license = "MIT/Apache-2.0"
