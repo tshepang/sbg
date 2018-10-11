@@ -23,4 +23,4 @@ cli:
           help: helped for nested subcommand arg
         - name: some-other-arg
           type: Url
-    - name: another-nested-subcommand
+    - name: nested-subcommand-without-args
