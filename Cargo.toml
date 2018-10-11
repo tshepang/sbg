@@ -19,6 +19,9 @@ structopt = "0.2"
 handlebars = "1"
 heck = "0.3"
 
+[dev-dependencies]
+url = "1"
+
 [badges]
 travis-ci = { repository = "tshepang/sbg" }
 appveyor = { repository = "tshepang/sbg" }

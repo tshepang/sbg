@@ -1,3 +1,7 @@
+imports:
+- "std::path::PathBuf"
+- "url::Url"
+
 cli:
 
 - name: simple
