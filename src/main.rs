@@ -38,6 +38,7 @@ struct Opt {
 
 #[derive(Deserialize, Serialize, Debug)]
 struct Settings {
+    #[serde(default)]
     imports: Vec<String>,
     cli: Vec<Specification>,
 }
