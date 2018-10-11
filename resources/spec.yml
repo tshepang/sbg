@@ -1,4 +1,4 @@
-specs:
+cli:
 
 - name: simple
   help: subcommand without args
