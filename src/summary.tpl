@@ -10,7 +10,7 @@
 {{~ /each }}
 ---
 {{~ else }}
-{{~ name }}
+{{ name }}
 {{~ #if args }}
 {{~ #each args }}
 {{~ #if positional }} <{{ kebab-case name }}>{{ #if (string-contains type "Vec") }}..{{ /if}}
