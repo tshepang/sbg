@@ -11,3 +11,6 @@ rust:
 script:
   - cargo build
 cache: cargo
+matrix:
+  allow_failures:
+    - os: windows
