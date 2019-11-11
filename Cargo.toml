@@ -20,7 +20,7 @@ handlebars = "1"
 heck = "0.3"
 
 [dev-dependencies]
-url = "1"
+url = "2"
 
 [badges]
 travis-ci = { repository = "tshepang/sbg" }
