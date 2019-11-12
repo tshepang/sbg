@@ -13,8 +13,8 @@ use url::Url;
 mod main_impl;
 
 #[derive(StructOpt)]
-#[structopt(raw(global_setting = "AppSettings::VersionlessSubcommands"))]
-#[structopt(raw(global_setting = "AppSettings::DisableHelpSubcommand"))]
+#[structopt(global_setting = AppSettings::VersionlessSubcommands)]
+#[structopt(global_setting = AppSettings::DisableHelpSubcommand)]
 enum Opt {
     /// subcommand without args
     #[structopt(name = "simple")]
