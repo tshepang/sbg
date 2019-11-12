@@ -1,13 +1,10 @@
 #[macro_use]
 extern crate handlebars;
-extern crate heck;
+
 #[macro_use]
 extern crate log;
-extern crate pretty_env_logger;
 #[macro_use]
 extern crate serde_derive;
-extern crate serde_yaml;
-extern crate structopt;
 
 use std::{error::Error, fs, path::PathBuf, process};
 
