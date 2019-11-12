@@ -63,7 +63,7 @@ struct Argument {
     positional: bool,
 }
 
-fn run() -> Result<(), Box<Error>> {
+fn run() -> Result<(), Box<dyn Error>> {
     let cli = Opt::from_args();
     debug!("Parsing input file: {:?}", cli.input);
     let settings: Settings = serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
