@@ -9,12 +9,7 @@ extern crate serde_derive;
 extern crate serde_yaml;
 extern crate structopt;
 
-use std::{
-    error::Error,
-    fs,
-    path::PathBuf,
-    process,
-};
+use std::{error::Error, fs, path::PathBuf, process};
 
 use handlebars::Handlebars;
 use heck::{CamelCase, KebabCase, SnakeCase};
