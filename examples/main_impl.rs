@@ -4,7 +4,10 @@ use url::Url;
 pub(crate) fn simple() -> Result<(), Box<dyn Error>> {
     unimplemented!();
 }
-pub(crate) fn not_so_simple(_some_arg: String, _some_other_arg: PathBuf) -> Result<(), Box<dyn Error>> {
+pub(crate) fn not_so_simple(
+    _some_arg: String,
+    _some_other_arg: PathBuf,
+) -> Result<(), Box<dyn Error>> {
     unimplemented!();
 }
 pub(crate) fn complex_nested_subcommand(
