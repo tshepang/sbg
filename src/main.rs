@@ -7,7 +7,6 @@ extern crate pretty_env_logger;
 #[macro_use]
 extern crate serde_derive;
 extern crate serde_yaml;
-#[macro_use]
 extern crate structopt;
 
 use std::{
