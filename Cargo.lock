@@ -101,7 +101,7 @@ dependencies = [
 
 [[package]]
 name = "heck"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "unicode-segmentation 1.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -321,7 +321,7 @@ name = "sbg"
 version = "0.0.2"
 dependencies = [
  "handlebars 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
- "heck 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "heck 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "pretty_env_logger 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.79 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -386,7 +386,7 @@ name = "structopt-derive"
 version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "heck 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "heck 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "proc-macro-error 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "proc-macro2 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "quote 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -609,7 +609,7 @@ dependencies = [
 "checksum dtoa 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)" = "6d301140eb411af13d3115f9a562c85cc6b541ade9dfa314132244aaee7489dd"
 "checksum env_logger 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)" = "aafcde04e90a5226a6443b7aabdb016ba2f8307c847d524724bd9b346dd1a2d3"
 "checksum handlebars 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)" = "3623110a77811256820e92df1b3b286f6f44f99d1f77a94b75e262c28d5034f4"
-"checksum heck 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ea04fa3ead4e05e51a7c806fc07271fdbde4e246a6c6d1efd52e72230b771b82"
+"checksum heck 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "20564e78d53d2bb135c343b3f47714a56af2061f1c928fdb541dc7b9fdd94205"
 "checksum humantime 1.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "0484fda3e7007f2a4a0d9c3a703ca38c71c54c55602ce4660c419fd32e188c9e"
 "checksum idna 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "02e2673c30ee86b5b96a9cb52ad15718aa1f966f5ab9ad54a8b95d5ca33120a9"
 "checksum itoa 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)" = "1306f3464951f30e30d12373d31c79fbd52d236e5e896fd92f96ec7babbbe60b"
