@@ -12,33 +12,25 @@ mod main_impl;
 #[clap(disable_help_subcommand = true)]
 enum Opt {
     /// subcommand without args
-    #[clap(name = "simple")]
     Simple {},
     /// subcommand with args
-    #[clap(name = "not-so-simple")]
     NotSoSimple {
         /// some-help help
         some_arg: String,
-        #[clap(long = "some-other-arg")]
         some_other_arg: PathBuf,
     },
     /// subcommand with args
-    #[clap(name = "complex")]
     #[clap(subcommand)]
     Complex(ComplexType),
 }
 
 #[derive(Parser)]
 enum ComplexType {
-    #[clap(name = "nested-subcommand")]
     NestedSubcommand {
         /// helped for nested subcommand arg
-        #[clap(long = "some-arg")]
         some_arg: String,
-        #[clap(long = "some-other-arg")]
         some_other_arg: Url,
     },
-    #[clap(name = "nested-subcommand-without-args")]
     NestedSubcommandWithoutArgs {
     },
 }

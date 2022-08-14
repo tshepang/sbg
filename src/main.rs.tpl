@@ -23,7 +23,6 @@ enum Opt {
     {{ #if help }}
     /// {{ help }}
     {{ /if }}
-    #[clap(name = "{{ kebab-case name }}")]
     {{ #if nested }}
     #[clap(subcommand)]
     {{ /if }}
@@ -34,8 +33,6 @@ enum Opt {
         /// {{ help }}
         {{ /if }}
         {{ #if positional }}
-        {{ else }}
-        #[clap(long = "{{ kebab-case name }}")]
         {{ /if }}
         {{ #if type }}
         {{ snake-case name }}: {{ type }},
@@ -62,15 +59,12 @@ enum {{ pascal-case name }}Type {
     {{ #if help }}
     /// {{ help }}
     {{ /if }}
-    #[clap(name = "{{ kebab-case name }}")]
     {{ pascal-case name }} {
         {{ #each args }}
         {{ #if help }}
         /// {{ help }}
         {{ /if }}
         {{ #if positional }}
-        {{ else }}
-        #[clap(long = "{{ kebab-case name }}")]
         {{ /if }}
         {{ #if type }}
         {{ snake-case name }}: {{ type }},
