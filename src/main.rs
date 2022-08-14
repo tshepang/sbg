@@ -1,7 +1,8 @@
+use anyhow::Result;
 use handlebars::handlebars_helper;
 use serde::{Deserialize, Serialize};
 
-use std::{error::Error, fs, path::PathBuf, process};
+use std::{fs, path::PathBuf};
 
 use clap::Parser;
 use handlebars::Handlebars;
@@ -55,7 +56,7 @@ struct Argument {
     positional: bool,
 }
 
-fn run() -> Result<(), Box<dyn Error>> {
+fn main() -> Result<()> {
     let cli = Opt::from_args();
     println!("Parsing input file: {:?}", cli.input);
     let settings: Settings = serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
@@ -96,11 +97,4 @@ fn run() -> Result<(), Box<dyn Error>> {
     }
 
     Ok(())
-}
-
-fn main() {
-    if let Err(why) = run() {
-        eprintln!("{}", why);
-        process::exit(1);
-    }
 }
