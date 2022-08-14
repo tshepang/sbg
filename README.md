@@ -1,6 +1,10 @@
-# sbg - StructOpt-driven Boilerplate Generator
+# sbg - CLI Boilerplate Generator
 
 [![build status](https://github.com/tshepang/sbg/workflows/CI/badge.svg)](https://github.com/tshepang/sbg/actions)
+
+> The `s` in `sbg` was for `StructOpt`,
+> but that is now deprecated,
+> but I would like to keep the name for now.
 
 You give this a yaml spec and it generates boilerplate code for you,
 which compiles if you give it Cargo.toml with these contents:
