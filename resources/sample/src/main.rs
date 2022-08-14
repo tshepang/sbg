@@ -2,9 +2,9 @@ use std::{
     path::PathBuf,
 };
 
-use anyhow::Result;
 use clap::Parser;
 use url::Url;
+use anyhow::Result;
 
 mod main_impl;
 

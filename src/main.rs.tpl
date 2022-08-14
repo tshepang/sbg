@@ -6,7 +6,6 @@ use std::{
     {{ /each }}
 };
 
-use anyhow::Result;
 use clap::Parser;
 {{ #each imports as |import| }}
 {{ #unless (is-stdlib import) }}

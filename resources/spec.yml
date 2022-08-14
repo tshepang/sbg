@@ -1,6 +1,7 @@
 imports:
 - "std::path::PathBuf"
 - "url::Url"
+- "anyhow::Result"
 
 cli:
 
