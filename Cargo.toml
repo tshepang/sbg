@@ -21,6 +21,3 @@ serde_yaml = "0.9"
 [dependencies.clap]
 version = "3"
 features = ["derive"]
-
-[dev-dependencies]
-url = "2"
