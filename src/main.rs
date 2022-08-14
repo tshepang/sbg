@@ -10,16 +10,14 @@ use heck::{ToKebabCase, ToSnakeCase, ToUpperCamelCase};
 
 #[derive(Parser)]
 struct Opt {
-    #[clap(parse(from_os_str))]
     /// specification file
     input: PathBuf,
-    #[clap(parse(from_os_str))]
     /// directory to place main.rs
     output_dir: PathBuf,
-    #[clap(long = "override-impl")]
+    #[clap(long)]
     /// override main_impl.rs
     override_impl: bool,
-    #[clap(long = "show-summary")]
+    #[clap(long)]
     show_summary: bool,
 }
 
@@ -57,7 +55,7 @@ struct Argument {
 }
 
 fn main() -> Result<()> {
-    let cli = Opt::from_args();
+    let cli = Opt::parse();
     println!("Parsing input file: {:?}", cli.input);
     let settings: Settings = serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
     if !cli.output_dir.exists() {
