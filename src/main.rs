@@ -9,6 +9,7 @@ use handlebars::Handlebars;
 use heck::{ToKebabCase, ToSnakeCase, ToUpperCamelCase};
 
 #[derive(Parser)]
+#[clap(version)]
 struct Opt {
     /// specification file
     input: PathBuf,

@@ -17,7 +17,7 @@ use {{ import }};
 mod main_impl;
 
 #[derive(Parser)]
-#[clap(disable_help_subcommand = true)]
+#[clap(version, disable_help_subcommand = true)]
 enum Opt {
     {{ #each cli }}
     {{ #if help }}

@@ -9,7 +9,7 @@ use url::Url;
 mod main_impl;
 
 #[derive(Parser)]
-#[clap(disable_help_subcommand = true)]
+#[clap(version, disable_help_subcommand = true)]
 enum Opt {
     /// subcommand without args
     Simple {},
