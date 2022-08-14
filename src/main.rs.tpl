@@ -34,8 +34,6 @@ enum Opt {
         /// {{ help }}
         {{ /if }}
         {{ #if positional }}
-        {{ #if (string-contains type "PathBuf") }}
-        {{ /if }}
         {{ else }}
         #[clap(long = "{{ kebab-case name }}")]
         {{ /if }}
