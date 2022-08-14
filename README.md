@@ -11,9 +11,8 @@ which compiles if you give it Cargo.toml with these contents:
 
 ```toml
 [dependencies]
-pretty_env_logger = "0.2"
-serde_derive = "1"
-log = "0.4"
+anyhow = "1"
+url = "2"
 
 [dependencies.clap]
 version = "3"
