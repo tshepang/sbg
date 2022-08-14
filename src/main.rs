@@ -1,10 +1,6 @@
-#[macro_use]
-extern crate handlebars;
-
-#[macro_use]
-extern crate log;
-#[macro_use]
-extern crate serde_derive;
+use handlebars::handlebars_helper;
+use log::{debug, error};
+use serde_derive::{Deserialize, Serialize};
 
 use std::{error::Error, fs, path::PathBuf, process};
 

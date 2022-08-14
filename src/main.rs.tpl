@@ -1,14 +1,3 @@
-#[macro_use]
-extern crate log;
-extern crate pretty_env_logger;
-#[macro_use]
-extern crate structopt;
-{{~ #each imports as |import| }}
-{{~ #unless (is-stdlib import) }}
-extern crate {{ crate-name import }};
-{{~ /unless }}
-{{~ /each }}
-
 use std::{
     error::Error,
     process,
@@ -145,7 +134,7 @@ fn run() -> Result<(), Box<dyn Error>> {
 fn main() {
     pretty_env_logger::init();
     if let Err(why) = run() {
-        error!("{}", why);
+        log::error!("{}", why);
         process::exit(1);
     }
 }
