@@ -2,133 +2,133 @@ use std::{
     error::Error,
     process,
     {{ #each imports as |import| }}
-    {{~ #if (is-stdlib import) }}
-    {{~ skip-crate-name import }},
-    {{~ /if }}
-    {{~ /each }}
+    {{ #if (is-stdlib import) }}
+    {{ skip-crate-name import }},
+    {{ /if }}
+    {{ /each }}
 };
 
 use clap::Parser;
-{{~ #each imports as |import| }}
-{{~ #unless (is-stdlib import) }}
+{{ #each imports as |import| }}
+{{ #unless (is-stdlib import) }}
 use {{ import }};
-{{~ /unless }}
-{{~ /each }}
+{{ /unless }}
+{{ /each }}
 
 mod main_impl;
 
 #[derive(Parser)]
 #[clap(disable_help_subcommand = true)]
 enum Opt {
-    {{~ #each cli }}
-    {{~ #if help }}
+    {{ #each cli }}
+    {{ #if help }}
     /// {{ help }}
-    {{~ /if }}
+    {{ /if }}
     #[clap(name = "{{ kebab-case name }}")]
-    {{~ #if nested }}
+    {{ #if nested }}
     #[clap(subcommand)]
-    {{~ /if }}
-    {{~ #if args }}
+    {{ /if }}
+    {{ #if args }}
     {{ pascal-case name }} {
-        {{~ #each args }}
-        {{~ #if help }}
+        {{ #each args }}
+        {{ #if help }}
         /// {{ help }}
-        {{~ /if }}
-        {{~ #if positional }}
-        {{~ #if (string-contains type "PathBuf") }}
+        {{ /if }}
+        {{ #if positional }}
+        {{ #if (string-contains type "PathBuf") }}
         #[clap(parse(from_os_str))]
-        {{~ /if }}
-        {{~ else }}
-        #[clap(long = "{{ kebab-case name }}"{{~ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
-        {{~ /if }}
-        {{~ #if type }}
+        {{ /if }}
+        {{ else }}
+        #[clap(long = "{{ kebab-case name }}"{{ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
+        {{ /if }}
+        {{ #if type }}
         {{ snake-case name }}: {{ type }},
-        {{~ else }}
+        {{ else }}
         {{ snake-case name }}: bool,
-        {{~ /if }}
-        {{~ /each }}
+        {{ /if }}
+        {{ /each }}
     },
-    {{~ else }}
-    {{~ #if nested }}
+    {{ else }}
+    {{ #if nested }}
     {{ pascal-case name }}({{ pascal-case name }}Type),
-    {{~ else }}
+    {{ else }}
     {{ pascal-case name }} {},
-    {{~ /if }}
-    {{~ /if }}
-    {{~ /each }}
+    {{ /if }}
+    {{ /if }}
+    {{ /each }}
 }
-{{~ #each cli }}
-{{~ #if nested }}
+{{ #each cli }}
+{{ #if nested }}
 
 #[derive(Parser)]
 enum {{ pascal-case name }}Type {
-    {{~ #each nested }}
-    {{~ #if help }}
+    {{ #each nested }}
+    {{ #if help }}
     /// {{ help }}
-    {{~ /if }}
+    {{ /if }}
     #[clap(name = "{{ kebab-case name }}")]
     {{ pascal-case name }} {
-        {{~ #each args }}
-        {{~ #if help }}
+        {{ #each args }}
+        {{ #if help }}
         /// {{ help }}
-        {{~ /if }}
-        {{~ #if positional }}
-        {{~ #if (string-contains type "PathBuf") }}
+        {{ /if }}
+        {{ #if positional }}
+        {{ #if (string-contains type "PathBuf") }}
         #[clap(parse(from_os_str))]
-        {{~ /if }}
-        {{~ else }}
-        #[clap(long = "{{ kebab-case name }}"{{~ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
-        {{~ /if }}
-        {{~ #if type }}
+        {{ /if }}
+        {{ else }}
+        #[clap(long = "{{ kebab-case name }}"{{ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
+        {{ /if }}
+        {{ #if type }}
         {{ snake-case name }}: {{ type }},
-        {{~ else }}
+        {{ else }}
         {{ snake-case name }}: bool,
-        {{~ /if }}
-        {{~ /each }}
+        {{ /if }}
+        {{ /each }}
     },
-    {{~ /each }}
+    {{ /each }}
 }
-{{~ /if }}
-{{~ /each }}
+{{ /if }}
+{{ /each }}
 
 fn run() -> Result<(), Box<dyn Error>> {
     let cli = Opt::from_args();
     use Opt::*;
     match cli {
-        {{~ #each cli }}
-        {{~ #if nested }}
+        {{ #each cli }}
+        {{ #if nested }}
         {{ pascal-case name }}({{ snake-case name }}) => {
             use {{ pascal-case name }}Type::*;
             match {{ snake-case name }} {
-                {{~ #each nested }}
+                {{ #each nested }}
                 {{ pascal-case name }} {
-                {{~ #each args }}
+                {{ #each args }}
                     {{ snake-case name }},
-                {{~ /each }}
+                {{ /each }}
                 } => {
                     main_impl::{{ snake-case ../name }}_{{ snake-case name }}(
-                        {{~ #each args }}
+                        {{ #each args }}
                         {{ snake-case name }},
-                        {{~ /each }}
+                        {{ /each }}
                     )?
                 }
-                {{~ /each }}
+                {{ /each }}
             }
         }
-        {{~ else }}
+        {{ else }}
         {{ pascal-case name }} {
-        {{~ #each args }}
+        {{ #each args }}
             {{ snake-case name }},
-        {{~ /each }}
+        {{ /each }}
         } => {
             main_impl::{{ snake-case name }}(
-                {{~ #each args }}
+                {{ #each args }}
                 {{ snake-case name }},
-                {{~ /each }}
+                {{ /each }}
             )?
         }
-        {{~ /if }}
-        {{~ /each }}
+        {{ /if }}
+        {{ /each }}
     }
     Ok(())
 }
