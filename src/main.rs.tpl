@@ -35,10 +35,9 @@ enum Opt {
         {{ /if }}
         {{ #if positional }}
         {{ #if (string-contains type "PathBuf") }}
-        #[clap(parse(from_os_str))]
         {{ /if }}
         {{ else }}
-        #[clap(long = "{{ kebab-case name }}"{{ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
+        #[clap(long = "{{ kebab-case name }}")]
         {{ /if }}
         {{ #if type }}
         {{ snake-case name }}: {{ type }},
@@ -72,11 +71,8 @@ enum {{ pascal-case name }}Type {
         /// {{ help }}
         {{ /if }}
         {{ #if positional }}
-        {{ #if (string-contains type "PathBuf") }}
-        #[clap(parse(from_os_str))]
-        {{ /if }}
         {{ else }}
-        #[clap(long = "{{ kebab-case name }}"{{ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
+        #[clap(long = "{{ kebab-case name }}")]
         {{ /if }}
         {{ #if type }}
         {{ snake-case name }}: {{ type }},
@@ -91,7 +87,7 @@ enum {{ pascal-case name }}Type {
 {{ /each }}
 
 fn main() -> Result<()> {
-    let cli = Opt::from_args();
+    let cli = Opt::parse();
     use Opt::*;
     match cli {
         {{ #each cli }}

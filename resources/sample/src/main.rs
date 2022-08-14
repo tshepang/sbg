@@ -19,7 +19,7 @@ enum Opt {
     NotSoSimple {
         /// some-help help
         some_arg: String,
-        #[clap(long = "some-other-arg", parse(from_os_str))]
+        #[clap(long = "some-other-arg")]
         some_other_arg: PathBuf,
     },
     /// subcommand with args
@@ -44,7 +44,7 @@ enum ComplexType {
 }
 
 fn main() -> Result<()> {
-    let cli = Opt::from_args();
+    let cli = Opt::parse();
     use Opt::*;
     match cli {
         Simple {
