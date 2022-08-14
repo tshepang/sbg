@@ -4,22 +4,22 @@ use serde_derive::{Deserialize, Serialize};
 
 use std::{error::Error, fs, path::PathBuf, process};
 
+use clap::Parser;
 use handlebars::Handlebars;
 use heck::{CamelCase, KebabCase, SnakeCase};
-use structopt::StructOpt;
 
-#[derive(StructOpt)]
+#[derive(Parser)]
 struct Opt {
-    #[structopt(parse(from_os_str))]
+    #[clap(parse(from_os_str))]
     /// specification file
     input: PathBuf,
-    #[structopt(parse(from_os_str))]
+    #[clap(parse(from_os_str))]
     /// directory to place main.rs
     output_dir: PathBuf,
-    #[structopt(long = "override-impl")]
+    #[clap(long = "override-impl")]
     /// override main_impl.rs
     override_impl: bool,
-    #[structopt(long = "show-summary")]
+    #[clap(long = "show-summary")]
     show_summary: bool,
 }
 

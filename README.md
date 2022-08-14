@@ -9,13 +9,16 @@ which compiles if you give it Cargo.toml with these contents:
 [dependencies]
 pretty_env_logger = "0.2"
 serde_derive = "1"
-structopt = "0.2"
 log = "0.4"
+
+[dependencies.clap]
+version = "3"
+features = ["derive"]
 ```
 
 I am aware that there is a macro to do this (in clap), but what the heck!
 Also, this is not flexible,
-and only supports a tiny subset of what structopt/clap supports.
+and only supports a tiny subset of what clap supports.
 
 The first time [steved] mentioned the idea to me, I felt
 "meh!", but once you get to nested subcommands, it becomes unwieldy

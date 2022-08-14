@@ -4,42 +4,42 @@ use std::{
     path::PathBuf,
 };
 
-use structopt::{clap::AppSettings, StructOpt};
+use clap::Parser;
 use url::Url;
 
 mod main_impl;
 
-#[derive(StructOpt)]
-#[structopt(raw(global_setting = "AppSettings::VersionlessSubcommands"))]
-#[structopt(raw(global_setting = "AppSettings::DisableHelpSubcommand"))]
+#[derive(Parser)]
+#[clap(disable_help_subcommand = true)]
 enum Opt {
     /// subcommand without args
-    #[structopt(name = "simple")]
+    #[clap(name = "simple")]
     Simple {},
     /// subcommand with args
-    #[structopt(name = "not-so-simple")]
+    #[clap(name = "not-so-simple")]
     NotSoSimple {
         /// some-help help
         some_arg: String,
-        #[structopt(long = "some-other-arg", parse(from_os_str))]
+        #[clap(long = "some-other-arg", parse(from_os_str))]
         some_other_arg: PathBuf,
     },
     /// subcommand with args
-    #[structopt(name = "complex")]
+    #[clap(name = "complex")]
+    #[clap(subcommand)]
     Complex(ComplexType),
 }
 
-#[derive(StructOpt)]
+#[derive(Parser)]
 enum ComplexType {
-    #[structopt(name = "nested-subcommand")]
+    #[clap(name = "nested-subcommand")]
     NestedSubcommand {
         /// helped for nested subcommand arg
-        #[structopt(long = "some-arg")]
+        #[clap(long = "some-arg")]
         some_arg: String,
-        #[structopt(long = "some-other-arg")]
+        #[clap(long = "some-other-arg")]
         some_other_arg: Url,
     },
-    #[structopt(name = "nested-subcommand-without-args")]
+    #[clap(name = "nested-subcommand-without-args")]
     NestedSubcommandWithoutArgs {
     },
 }

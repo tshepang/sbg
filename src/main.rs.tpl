@@ -8,7 +8,7 @@ use std::{
     {{~ /each }}
 };
 
-use structopt::{clap::AppSettings, StructOpt};
+use clap::Parser;
 {{~ #each imports as |import| }}
 {{~ #unless (is-stdlib import) }}
 use {{ import }};
@@ -17,15 +17,17 @@ use {{ import }};
 
 mod main_impl;
 
-#[derive(StructOpt)]
-#[structopt(raw(global_setting = "AppSettings::VersionlessSubcommands"))]
-#[structopt(raw(global_setting = "AppSettings::DisableHelpSubcommand"))]
+#[derive(Parser)]
+#[clap(disable_help_subcommand = true)]
 enum Opt {
     {{~ #each cli }}
     {{~ #if help }}
     /// {{ help }}
     {{~ /if }}
-    #[structopt(name = "{{ kebab-case name }}")]
+    #[clap(name = "{{ kebab-case name }}")]
+    {{~ #if nested }}
+    #[clap(subcommand)]
+    {{~ /if }}
     {{~ #if args }}
     {{ pascal-case name }} {
         {{~ #each args }}
@@ -34,10 +36,10 @@ enum Opt {
         {{~ /if }}
         {{~ #if positional }}
         {{~ #if (string-contains type "PathBuf") }}
-        #[structopt(parse(from_os_str))]
+        #[clap(parse(from_os_str))]
         {{~ /if }}
         {{~ else }}
-        #[structopt(long = "{{ kebab-case name }}"{{~ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
+        #[clap(long = "{{ kebab-case name }}"{{~ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
         {{~ /if }}
         {{~ #if type }}
         {{ snake-case name }}: {{ type }},
@@ -58,13 +60,13 @@ enum Opt {
 {{~ #each cli }}
 {{~ #if nested }}
 
-#[derive(StructOpt)]
+#[derive(Parser)]
 enum {{ pascal-case name }}Type {
     {{~ #each nested }}
     {{~ #if help }}
     /// {{ help }}
     {{~ /if }}
-    #[structopt(name = "{{ kebab-case name }}")]
+    #[clap(name = "{{ kebab-case name }}")]
     {{ pascal-case name }} {
         {{~ #each args }}
         {{~ #if help }}
@@ -72,10 +74,10 @@ enum {{ pascal-case name }}Type {
         {{~ /if }}
         {{~ #if positional }}
         {{~ #if (string-contains type "PathBuf") }}
-        #[structopt(parse(from_os_str))]
+        #[clap(parse(from_os_str))]
         {{~ /if }}
         {{~ else }}
-        #[structopt(long = "{{ kebab-case name }}"{{~ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
+        #[clap(long = "{{ kebab-case name }}"{{~ #if (string-contains type "PathBuf") }}, parse(from_os_str){{ /if }})]
         {{~ /if }}
         {{~ #if type }}
         {{ snake-case name }}: {{ type }},
