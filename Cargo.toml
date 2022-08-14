@@ -1,6 +1,6 @@
 [package]
 name = "sbg"
-version = "0.0.2"
+version = "0.0.3"
 description = "generates CLI boilerplate"
 repository = "https://github.com/tshepang/sbg"
 license = "MIT/Apache-2.0"
