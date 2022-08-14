@@ -1,5 +1,6 @@
 # sbg - CLI Boilerplate Generator
 
+[![crates.io](https://img.shields.io/crates/v/sbg.svg)](https://crates.io/crates/sbg)
 [![build status](https://github.com/tshepang/sbg/workflows/CI/badge.svg)](https://github.com/tshepang/sbg/actions)
 
 > The `s` in `sbg` was for `StructOpt`,
