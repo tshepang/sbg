@@ -22,7 +22,3 @@ heck = "0.3"
 
 [dev-dependencies]
 url = "2"
-
-[badges]
-travis-ci = { repository = "tshepang/sbg" }
-appveyor = { repository = "tshepang/sbg" }

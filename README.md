@@ -1,7 +1,6 @@
 # sbg - StructOpt-driven Boilerplate Generator
 
-[![Linux build status](https://travis-ci.org/tshepang/mrh.svg?branch=master)](https://travis-ci.org/tshepang/sbg)
-[![Windows build status](https://ci.appveyor.com/api/projects/status/github/tshepang/sbg?svg=true)](https://ci.appveyor.com/project/tshepang/sbg)
+[![build status](https://github.com/tshepang/sbg/workflows/CI/badge.svg)](https://github.com/tshepang/sbg/actions)
 
 You give this a yaml spec and it generates boilerplate code for you,
 which compiles if you give it Cargo.toml with these contents:
