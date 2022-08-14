@@ -6,7 +6,7 @@ use std::{error::Error, fs, path::PathBuf, process};
 
 use clap::Parser;
 use handlebars::Handlebars;
-use heck::{CamelCase, KebabCase, SnakeCase};
+use heck::{ToKebabCase, ToSnakeCase, ToUpperCamelCase};
 
 #[derive(Parser)]
 struct Opt {
@@ -70,7 +70,7 @@ fn run() -> Result<(), Box<dyn Error>> {
     handlebars.register_helper("snake-case", Box::new(snake_case));
     handlebars_helper!(kebab_case: |x: str| x.to_kebab_case());
     handlebars.register_helper("kebab-case", Box::new(kebab_case));
-    handlebars_helper!(pascal_case: |x: str| x.to_camel_case());
+    handlebars_helper!(pascal_case: |x: str| x.to_upper_camel_case());
     handlebars.register_helper("pascal-case", Box::new(pascal_case));
     handlebars_helper!(string_contains: |x: str, y: str| x.contains(y));
     handlebars.register_helper("string-contains", Box::new(string_contains));
