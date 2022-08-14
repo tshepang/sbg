@@ -1,9 +1,8 @@
 use std::{
-    error::Error,
-    process,
     path::PathBuf,
 };
 
+use anyhow::Result;
 use clap::Parser;
 use url::Url;
 
@@ -44,7 +43,7 @@ enum ComplexType {
     },
 }
 
-fn run() -> Result<(), Box<dyn Error>> {
+fn main() -> Result<()> {
     let cli = Opt::from_args();
     use Opt::*;
     match cli {
@@ -83,12 +82,4 @@ fn run() -> Result<(), Box<dyn Error>> {
         }
     }
     Ok(())
-}
-
-fn main() {
-    pretty_env_logger::init();
-    if let Err(why) = run() {
-        log::error!("{}", why);
-        process::exit(1);
-    }
 }

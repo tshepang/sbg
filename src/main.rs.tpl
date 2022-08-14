@@ -1,6 +1,4 @@
 use std::{
-    error::Error,
-    process,
     {{ #each imports as |import| }}
     {{ #if (is-stdlib import) }}
     {{ skip-crate-name import }},
@@ -8,6 +6,7 @@ use std::{
     {{ /each }}
 };
 
+use anyhow::Result;
 use clap::Parser;
 {{ #each imports as |import| }}
 {{ #unless (is-stdlib import) }}
@@ -91,7 +90,7 @@ enum {{ pascal-case name }}Type {
 {{ /if }}
 {{ /each }}
 
-fn run() -> Result<(), Box<dyn Error>> {
+fn main() -> Result<()> {
     let cli = Opt::from_args();
     use Opt::*;
     match cli {
@@ -131,12 +130,4 @@ fn run() -> Result<(), Box<dyn Error>> {
         {{ /each }}
     }
     Ok(())
-}
-
-fn main() {
-    pretty_env_logger::init();
-    if let Err(why) = run() {
-        log::error!("{}", why);
-        process::exit(1);
-    }
 }
