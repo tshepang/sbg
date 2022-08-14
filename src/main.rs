@@ -1,5 +1,5 @@
 use handlebars::handlebars_helper;
-use serde_derive::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 use std::{error::Error, fs, path::PathBuf, process};
 
