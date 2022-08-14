@@ -46,6 +46,8 @@ Assuming you have the [Rust toolchain installed][install]:
 
     cargo install sbg
 
+NOTE: minimum required rustc is v1.58, due to serde-yaml requiring it.
+
 ## License
 
 Licensed under either of
