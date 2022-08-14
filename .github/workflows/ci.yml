@@ -35,6 +35,14 @@ jobs:
     - name: Build
       run: cargo build
 
+    - name: Generate files
+      run:
+        - cargo run resources/spec.yml resources/sample/src --override-impl
+
+    - name: Test that generated files compile
+      run:
+        - cargo run --manifest-path resources/sample/Cargo.toml
+
   security-audit:
     runs-on: ubuntu-latest
     steps:
