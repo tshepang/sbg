@@ -1,7 +1,15 @@
 #[macro_use]
 extern crate log;
+extern crate pretty_env_logger;
+#[macro_use]
+extern crate structopt;
+extern crate url;
 
-use std::{error::Error, path::PathBuf, process};
+use std::{
+    error::Error,
+    process,
+    path::PathBuf,
+};
 
 use structopt::{clap::AppSettings, StructOpt};
 use url::Url;
@@ -9,8 +17,8 @@ use url::Url;
 mod main_impl;
 
 #[derive(StructOpt)]
-#[structopt(global_setting = AppSettings::VersionlessSubcommands)]
-#[structopt(global_setting = AppSettings::DisableHelpSubcommand)]
+#[structopt(raw(global_setting = "AppSettings::VersionlessSubcommands"))]
+#[structopt(raw(global_setting = "AppSettings::DisableHelpSubcommand"))]
 enum Opt {
     /// subcommand without args
     #[structopt(name = "simple")]
@@ -39,27 +47,44 @@ enum ComplexType {
         some_other_arg: Url,
     },
     #[structopt(name = "nested-subcommand-without-args")]
-    NestedSubcommandWithoutArgs {},
+    NestedSubcommandWithoutArgs {
+    },
 }
 
-fn run() -> Result<(), Box<dyn Error>> {
+fn run() -> Result<(), Box<Error>> {
     let cli = Opt::from_args();
     use Opt::*;
     match cli {
-        Simple {} => main_impl::simple()?,
+        Simple {
+        } => {
+            main_impl::simple(
+            )?
+        }
         NotSoSimple {
             some_arg,
             some_other_arg,
-        } => main_impl::not_so_simple(some_arg, some_other_arg)?,
+        } => {
+            main_impl::not_so_simple(
+                some_arg,
+                some_other_arg,
+            )?
+        }
         Complex(complex) => {
             use ComplexType::*;
             match complex {
                 NestedSubcommand {
                     some_arg,
                     some_other_arg,
-                } => main_impl::complex_nested_subcommand(some_arg, some_other_arg)?,
-                NestedSubcommandWithoutArgs {} => {
-                    main_impl::complex_nested_subcommand_without_args()?
+                } => {
+                    main_impl::complex_nested_subcommand(
+                        some_arg,
+                        some_other_arg,
+                    )?
+                }
+                NestedSubcommandWithoutArgs {
+                } => {
+                    main_impl::complex_nested_subcommand_without_args(
+                    )?
                 }
             }
         }
