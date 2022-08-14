@@ -1,5 +1,4 @@
 use handlebars::handlebars_helper;
-use log::{debug, error};
 use serde_derive::{Deserialize, Serialize};
 
 use std::{error::Error, fs, path::PathBuf, process};
@@ -58,7 +57,7 @@ struct Argument {
 
 fn run() -> Result<(), Box<dyn Error>> {
     let cli = Opt::from_args();
-    debug!("Parsing input file: {:?}", cli.input);
+    println!("Parsing input file: {:?}", cli.input);
     let settings: Settings = serde_yaml::from_str(&fs::read_to_string(cli.input)?)?;
     if !cli.output_dir.exists() {
         fs::create_dir_all(&cli.output_dir)?;
@@ -100,9 +99,8 @@ fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn main() {
-    pretty_env_logger::init();
     if let Err(why) = run() {
-        error!("{}", why);
+        eprintln!("{}", why);
         process::exit(1);
     }
 }
