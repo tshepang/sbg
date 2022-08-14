@@ -19,8 +19,7 @@ version = "3"
 features = ["derive"]
 ```
 
-I am aware that there is a macro to do this (in clap), but what the heck!
-Also, this is not flexible,
+This is not flexible,
 and only supports a tiny subset of what clap supports.
 
 The first time [steved] mentioned the idea to me, I felt
