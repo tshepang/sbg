@@ -51,7 +51,7 @@ enum ComplexType {
     },
 }
 
-fn run() -> Result<(), Box<Error>> {
+fn run() -> Result<(), Box<dyn Error>> {
     let cli = Opt::from_args();
     use Opt::*;
     match cli {
