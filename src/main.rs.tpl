@@ -32,8 +32,6 @@ enum Opt {
         {{ #if help }}
         /// {{ help }}
         {{ /if }}
-        {{ #if positional }}
-        {{ /if }}
         {{ #if type }}
         {{ snake-case name }}: {{ type }},
         {{ else }}
@@ -63,8 +61,6 @@ enum {{ pascal-case name }}Type {
         {{ #each args }}
         {{ #if help }}
         /// {{ help }}
-        {{ /if }}
-        {{ #if positional }}
         {{ /if }}
         {{ #if type }}
         {{ snake-case name }}: {{ type }},
